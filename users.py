@@ -31,7 +31,6 @@ async def user(id: int):
 async def user(id: int):
     return search_user(id)
 
-
 # POST method in my API
 @app.post("/user/")
 async def user(user: User):
@@ -39,6 +38,18 @@ async def user(user: User):
         return {"error": "Ya existe este usuario."}
     else:
         user_list.append(user)
+
+# PUT method in my API
+@app.put("/user/")
+async def user(user: User):
+    updated = False
+    for i, updated_user in enumerate(user_list):
+        if updated_user.id == user.id:
+            user_list[i] = user
+            updated = True
+    if not updated:
+        return {"error": "No se ha actualizado el usuario."}
+    return user
 
 
 def search_user(id):
