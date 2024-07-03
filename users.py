@@ -51,6 +51,19 @@ async def user(user: User):
         return {"error": "No se ha actualizado el usuario."}
     return user
 
+@app.delete("/user/{id}")
+async def user(id: int):
+    deleted = False
+    for i, deleted_user in enumerate(user_list):
+        if deleted_user.id == id:
+            del user_list[i]
+            deleted = True
+            
+    if not deleted:
+        return {"error": "No se ha eliminado el usuario."}
+    
+    
+
 
 def search_user(id):
     user = filter(lambda user_of_list: user_of_list.id == id, user_list)
