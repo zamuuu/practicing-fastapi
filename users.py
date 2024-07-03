@@ -38,8 +38,8 @@ async def user(user: User):
     if type(search_user(user.id)) == User:
         return {"error": "Ya existe este usuario."}
     else:
-        return user_list.append(user)
-    
+        user_list.append(user)
+
 
 def search_user(id):
     user = filter(lambda user_of_list: user_of_list.id == id, user_list)
